@@ -1,11 +1,19 @@
 {
-  "name": "l2-modul",
+  "name": "l2-image-proceesor-module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hao Chen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^5.4.6"
+  }
 }
