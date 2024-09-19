@@ -23,7 +23,7 @@ let isRotated = false;
 let file = "";
 let imageData = "";
 
-function loadImage() {
+export function loadImage() {
   
 }
 
