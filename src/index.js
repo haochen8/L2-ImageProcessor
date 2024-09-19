@@ -15,3 +15,15 @@ const rotateButton = document.getElementById("rotate");
 const originalCanvas = document.getElementById("originalCanvas");
 const rotatedCanvas = document.getElementById("rotatedCanvas");
 
+// Initialize variables
+let originalImageData;
+let rotatedImageData;
+let angle = 0;
+let isRotated = false;
+let file = "";
+let imageData = "";
+
+function loadImage() {
+  
+}
+

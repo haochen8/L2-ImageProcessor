@@ -13,12 +13,6 @@
  * @param {number} angle - The angle to rotate the image.
  */
 export function rotateImage(imageData, angle) {
-  // Create a canvas element to draw the rotated image
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  canvas.width = width;
-  canvas.height = height;
-
   // Set angle to a value between 0 and 360
   angle = angle % 360;
   if (angle < 0) {
@@ -33,15 +27,47 @@ export function rotateImage(imageData, angle) {
     return imageData;
   }
 
-  // Convert angle to radian
-  const radian = (angle * Math.PI) / 180;
+  // Create temporary canvas and context for the original image
+  const temporaryCanvas = document.createElement("canvas");
+  temporaryCanvas.width = imageData.width;
+  temporaryCanvas.height = imageData.height;
+  const temporaryContext = temporaryCanvas.getContext("2d");
+  temporaryContext.putImageData(imageData, 0, 0);
 
-  // Rotate the canvas
-  context.translate(width / 2, height / 2);
-  context.rotate(radian);
-  context.translate(-width / 2, -height / 2);
-  context.putImageData(imageData, 0, 0);
+  // Set new dimensions for the rotated image
+  let newWidth, newHeight;
+  if (angle === 90 || angle === 270) {
+    newWidth = imageData.height;
+    newHeight = imageData.width;
+  } else {
+    // If angle is 180 degrees
+    newWidth = imageData.width;
+    newHeight = imageData.height;
+  }
 
-  // Get the rotated image data
-  return canvas;
+  // Create a new canvas and context for the rotated image
+  const canvas = document.createElement("canvas");
+  canvas.width = newWidth;
+  canvas.height = newHeight;
+  const context = canvas.getContext("2d");
+
+  // Apply transformation based on angle
+  if (angle === 90) {
+    context.translate(newWidth, 0);
+    context.rotate(Math.PI / 2);
+  } else if (angle === 180) {
+    context.translate(newWidth, newHeight);
+    context.rotate(Math.PI);
+  } else if (angle === 270) {
+    context.translate(0, newHeight);
+    context.rotate((3 * Math.PI) / 2);
+  }
+
+  // Draw original image on the transformed context
+  context.drawImage(temporaryCanvas, 0, 0);
+
+  // Get the rotated image data and return it
+  const rotatedImageData = context.getImageData(0, 0, newWidth, newHeight);
+
+  return rotatedImageData;
 }

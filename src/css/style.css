@@ -6,9 +6,17 @@ body {
   margin-top: 100px;
 }
 
-canvas {
+#originalCanvas {
   background-color: #f8f8f8;
   border: 1px solid #ccc;
-  width: 600px;
-  height: 400px;
+  width: 400px;
+  height: 300px;
 }
+
+#rotatedCanvas {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  width: 400px;
+  height: 300px;
+}
+
