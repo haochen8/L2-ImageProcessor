@@ -7,6 +7,5 @@
  */
 
 import { ImageProcessor } from "./ImageProcessor.js";
-import { rotateImage, loadImage } from "./util.js";
 
-export { ImageProcessor, rotateImage, loadImage };
+export { ImageProcessor };

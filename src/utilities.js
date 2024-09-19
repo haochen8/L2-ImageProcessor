@@ -1,7 +1,7 @@
 /**
  * Utility functions
  *
- * @module util.js
+ * @module utilities.js
  * @author Hao Chen
  * @version 1.0.0
  */
@@ -12,7 +12,7 @@
  * @param {ImageData} imageData - The image data to rotate.
  * @param {number} angle - The angle to rotate the image.
  */
-function rotateImage(imageData, angle) {
+export function rotateImage(imageData, angle) {
   // Set angle to a value between 0 and 360
   angle = angle % 360;
   if (angle < 0) {
@@ -67,11 +67,45 @@ function rotateImage(imageData, angle) {
   context.drawImage(temporaryCanvas, 0, 0);
 
   // Get the rotated image data and return it
-  const rotatedImageData = context.getImageData(0, 0, newWidth, newHeight);
+  const rotatedImageData = context.getImageData(0, 0, newWidth,newHeight);
 
   return rotatedImageData;
 }
 
-function loadImage() {
-  
+/**
+ * Check if a file is a valid image file.
+ * 
+ * @param {File} file - The file to validate.
+ * @returns {boolean} - Whether the file is a valid image file.
+ */
+export function isValidImageType(file) {
+  const validTypes = ["image/jpeg", "image/png", "image/gif"];
+  return validTypes.includes(file.type);
 }
+
+/**
+ * Load an image from a given source.
+ *
+ * @param {string|File} file - The source of the image to load.
+ */
+export function loadImage(file) {
+
+  // Create a new image element
+  let image = new Image();
+
+  // Set the source of the image
+  if (typeof source === 'string') {
+    image.src = source;
+  } else if (source instanceof File) {
+    image.src = URL.createObjectURL(source);
+  } else {
+    throw new Error('Invalid image source');
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = image.width;
+  canvas.height = image.height;
+  const context = canvas.getContext("2d");
+}
+
+

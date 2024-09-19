@@ -1,4 +1,4 @@
-import { rotateImage } from "./util.js";
+import { rotateImage, loadImage } from "./utilities.js";
 
 /**
  * Class for processing images.
