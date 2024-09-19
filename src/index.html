@@ -9,11 +9,21 @@
   </head>
   <body>
     <div id="image-container">
-      <h1>Image-Processor</h1>
-      <canvas id="image"></canvas>
+      <h1>Image-Processor || Test App</h1>
+      <!-- <canvas id="canvas"></canvas> -->
       <div id="image-area">
         Click to upload image
-        <input type="file" id="file" />
+        <input type="file" id="upload" accept="image" />
+        <select name="" id="angle">
+          <option value="0">0°</option>
+          <option value="90">90°</option>
+          <option value="180">180°</option>
+          <option value="270">270°</option>
+          <button id="rotateButton">Rotate</button>
+          <br>
+          <canvas id="originalCanvas"></canvas>
+          <canvas id="rotatedCanvas"></canvas>
+        </select>
       </div>
     </div>
   </body>
