@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image-Processor Module</title>
+    <script type="module" src="app.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="image-container">
+      <h1>Image-Processor || Test App</h1>
+      <!-- <canvas id="canvas"></canvas> -->
+      <div id="image-area">
+        Click to upload image
+        <input type="file" id="upload" accept="image" />
+        <select name="" id="angle">
+          <option value="0">0°</option>
+          <option value="90">90°</option>
+          <option value="180">180°</option>
+          <option value="270">270°</option>
+        </select>
+        <button id="rotateButton">Rotate</button>
+        <button id="resetButton">Reset</button>
+        <br />
+        <canvas id="originalCanvas"></canvas>
+        <canvas id="rotatedCanvas"></canvas>
+      </div>
+    </div>
+  </body>
+</html>

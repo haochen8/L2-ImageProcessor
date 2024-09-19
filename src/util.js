@@ -12,7 +12,7 @@
  * @param {ImageData} imageData - The image data to rotate.
  * @param {number} angle - The angle to rotate the image.
  */
-export function rotateImage(imageData, angle) {
+function rotateImage(imageData, angle) {
   // Set angle to a value between 0 and 360
   angle = angle % 360;
   if (angle < 0) {
@@ -70,4 +70,8 @@ export function rotateImage(imageData, angle) {
   const rotatedImageData = context.getImageData(0, 0, newWidth, newHeight);
 
   return rotatedImageData;
+}
+
+function loadImage() {
+  
 }
