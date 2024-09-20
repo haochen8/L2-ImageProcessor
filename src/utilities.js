@@ -22,11 +22,9 @@ export function rotateImage(imageData, angle) {
 
   // Round angle to the nearest 90 degrees
   angle = Math.round(angle / 90) * 90;
-  console.log(`Rotating image by ${angle} degrees`);
 
   // If angle is 0 or 360, return the original image
   if (angle === 0 || angle === 360) {
-    console.log(`No rotation needed`);
     return imageData;
   }
 
@@ -129,4 +127,14 @@ export function loadImage(file) {
     // Read the file as a data URL
     reader.readAsDataURL(file);
   });
+}
+
+/**
+ * Reset an image to its original state.
+ *
+ * @param {ImageData} originalImageData - The original image data.
+ * @returns {ImageData} - The original image data.
+ */
+export function resetImage(originalImageData) {
+  return originalImageData;
 }

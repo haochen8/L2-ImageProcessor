@@ -1,4 +1,4 @@
-import { rotateImage, loadImage } from "./utilities.js";
+import { rotateImage, resetImage } from "./utilities.js";
 
 /**
  * Class for processing images.
@@ -10,6 +10,10 @@ export class ImageProcessor {
 
   rotate(angle) {
     this.imageData = rotateImage(this.imageData, angle);
+  }
+
+  reset() {
+    this.imageData = resetImage(this.imageData);
   }
 
   getImageData() {

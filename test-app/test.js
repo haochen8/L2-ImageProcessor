@@ -11,24 +11,46 @@ import { ImageProcessor, loadImage } from "../src/index.js";
 // Get elements from the DOM
 const fileInput = document.getElementById("fileInput");
 const rotateButton = document.getElementById("rotateButton");
+const resetButton = document.getElementById("resetButton");
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
-let imageData;
+let originalImageData;
 let processor;
 
 // Event listener for the file input
 fileInput.addEventListener("change", async (event) => {
   const file = event.target.files[0];
+  try {
   const imageData = await loadImage(file);
+  
+  // Save the original image data
+  originalImageData = imageData;
   processor = new ImageProcessor(imageData);
   displayImage(processor.getImageData());
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // Event listener for the rotate button
 rotateButton.addEventListener("click", () => {
-  processor.rotate(90);
-  displayImage(processor.getImageData());
+  if (processor) {
+    processor.rotate(90);
+    displayImage(processor.getImageData());
+  } else {
+    alert("There is none image to rotate");
+  }
+});
+
+// Event listener for the reset button
+resetButton.addEventListener("click", () => {
+  if(originalImageData) {
+    processor = new ImageProcessor(originalImageData);
+    displayImage(processor.getImageData());
+  } else {
+    alert("There is none image to reset");
+  }
 });
 
 /**
