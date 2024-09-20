@@ -22,17 +22,12 @@ export function rotateImage(imageData, angle) {
 
   // Round angle to the nearest 90 degrees
   angle = Math.round(angle / 90) * 90;
-  console.log(`Rotating image by ¢{angle}`)
+  console.log(`Rotating image by ${angle} degrees`);
 
   // If angle is 0 or 360, return the original image
   if (angle === 0 || angle === 360) {
-    console.log(`No rotation needed`)
+    console.log(`No rotation needed`);
     return imageData;
-  }
-
-  // If image data is invalid
-  if (!imageData || imageData.data) {
-    throw new Error("Invalid image data")
   }
 
   // Create temporary canvas and context for the original image
@@ -75,14 +70,14 @@ export function rotateImage(imageData, angle) {
   context.drawImage(temporaryCanvas, 0, 0);
 
   // Get the rotated image data and return it
-  const rotatedImageData = context.getImageData(0, 0, newWidth,newHeight);
+  const rotatedImageData = context.getImageData(0, 0, newWidth, newHeight);
 
   return rotatedImageData;
 }
 
 /**
  * Check if a file is a valid image file.
- * 
+ *
  * @param {File} file - The file to validate.
  * @returns {boolean} - Whether the file is a valid image file.
  */
@@ -95,33 +90,43 @@ export function isValidImageType(file) {
  * Load an image from a given source.
  *
  * @param {string|File} file - The source of the image to load.
+ * @returns {Promise<ImageData>} - A promise that resolves with the image data.
  */
 export function loadImage(file) {
   return new Promise((resolve, reject) => {
-    isValidImageType(file) ? resolve() : reject("Invalid image file type");
+    // If the file is not a valid image file
+    if (!isValidImageType(file)) {
+      reject(new Error("Invalid image file"));
+      return;
+    }
 
-    const reader = new FileReader()
-
+    // Create a new FileReader
+    const reader = new FileReader();
+    // When the file is loaded
     reader.onload = () => {
-      const image = new Image()
+      const image = new Image();
       image.onload = () => {
         // Create a canvas and context to draw the image
-        const canvas = document.createElement("canvas")
-        canvas.width = image.width
-        canvas.height = image.height
-        const context = canvas.getContext("2d")
-        context.drawImage(image, 0, 0)
-        const imageData = context.getImageData(0, 0, image.width, image.height)
-        resolve(imageData)
-      }
+        const canvas = document.createElement("canvas");
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0);
+        const imageData = context.getImageData(0, 0, image.width, image.height);
+        resolve(imageData);
+      };
       // Set the image source to the data
-      image.src = reader.result
-      reader.onerror = () => reject("Error loading image")
-    }
+      image.src = reader.result;
+
+      image.onerror = () => {
+        reject("Invalid image file");
+      };
+
+      reader.onerror = () => {
+        reject("Error loading image");
+      };
+    };
     // Read the file as a data URL
-    reader.readAsDataURL(file)
-  })
-  }
-
-
-
+    reader.readAsDataURL(file);
+  });
+}

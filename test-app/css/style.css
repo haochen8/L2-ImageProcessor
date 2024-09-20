@@ -6,17 +6,10 @@ body {
   margin-top: 100px;
 }
 
-#originalCanvas {
+#canvas {
   background-color: #f8f8f8;
   border: 1px solid #ccc;
-  width: 400px;
-  height: 300px;
-}
-
-#rotatedCanvas {
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
 }
 
