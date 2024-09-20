@@ -11,6 +11,7 @@
  *
  * @param {ImageData} imageData - The image data to rotate.
  * @param {number} angle - The angle to rotate the image.
+ * @throws {Error} - If image data is invalid.
  */
 export function rotateImage(imageData, angle) {
   // Set angle to a value between 0 and 360
@@ -21,10 +22,17 @@ export function rotateImage(imageData, angle) {
 
   // Round angle to the nearest 90 degrees
   angle = Math.round(angle / 90) * 90;
+  console.log(`Rotating image by ¢{angle}`)
 
   // If angle is 0 or 360, return the original image
   if (angle === 0 || angle === 360) {
+    console.log(`No rotation needed`)
     return imageData;
+  }
+
+  // If image data is invalid
+  if (!imageData || imageData.data) {
+    throw new Error("Invalid image data")
   }
 
   // Create temporary canvas and context for the original image
@@ -89,23 +97,31 @@ export function isValidImageType(file) {
  * @param {string|File} file - The source of the image to load.
  */
 export function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    isValidImageType(file) ? resolve() : reject("Invalid image file type");
 
-  // Create a new image element
-  let image = new Image();
+    const reader = new FileReader()
 
-  // Set the source of the image
-  if (typeof source === 'string') {
-    image.src = source;
-  } else if (source instanceof File) {
-    image.src = URL.createObjectURL(source);
-  } else {
-    throw new Error('Invalid image source');
+    reader.onload = () => {
+      const image = new Image()
+      image.onload = () => {
+        // Create a canvas and context to draw the image
+        const canvas = document.createElement("canvas")
+        canvas.width = image.width
+        canvas.height = image.height
+        const context = canvas.getContext("2d")
+        context.drawImage(image, 0, 0)
+        const imageData = context.getImageData(0, 0, image.width, image.height)
+        resolve(imageData)
+      }
+      // Set the image source to the data
+      image.src = reader.result
+      reader.onerror = () => reject("Error loading image")
+    }
+    // Read the file as a data URL
+    reader.readAsDataURL(file)
+  })
   }
 
-  const canvas = document.createElement("canvas");
-  canvas.width = image.width;
-  canvas.height = image.height;
-  const context = canvas.getContext("2d");
-}
 
 
