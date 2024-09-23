@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-import { grayScale } from "./filters.js";
+import * as filters from "./filters.js";
 import { rotateImage, resetImage } from "./utilities.js";
 
 /**
@@ -39,7 +39,7 @@ export class ImageProcessor {
    * Apply a grayscale filter to the image.
    */
   grayScale() {
-    grayScale(this.imageData);
+    this.imageData = filters.grayScale(this.imageData);
   }
 
   /**

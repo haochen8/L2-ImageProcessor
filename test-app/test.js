@@ -12,6 +12,7 @@ import { ImageProcessor, loadImage } from "../src/index.js";
 const fileInput = document.getElementById("fileInput");
 const rotateButton = document.getElementById("rotateButton");
 const resetButton = document.getElementById("resetButton");
+const grayScaleButton = document.getElementById("grayScaleButton");
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
@@ -40,6 +41,16 @@ rotateButton.addEventListener("click", () => {
     displayImage(processor.getImageData());
   } else {
     alert("There is none image to rotate");
+  }
+});
+
+// Event listener for the grayscale button
+grayScaleButton.addEventListener("click", () => {
+  if (processor) {
+    processor.grayScale();
+    displayImage(processor.getImageData());
+  } else {
+    alert("There is none image to grayscale");
   }
 });
 
