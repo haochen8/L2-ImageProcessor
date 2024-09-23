@@ -1,7 +1,7 @@
 /**
  * Main entry point of the application.
  *
- * @module index.js
+ * @file index.js
  * @author Hao Chen
  * @version 1.0.0
  */

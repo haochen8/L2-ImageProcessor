@@ -1,7 +1,7 @@
 /**
  * Test application for the image processor module.
  *
- * @module test.js
+ * @file test.js
  * @author Hao Chen
  * @version 1.0.0
  */
@@ -59,7 +59,10 @@ resetButton.addEventListener("click", () => {
  * @param {ImageData} imageData - The image data to display.
  */
 function displayImage(imageData) {
+  // Set the canvas dimensions to match the image
   canvas.width = imageData.width;
   canvas.height = imageData.height;
+
+  // Draw the image data on the canvas
   context.putImageData(imageData, 0, 0);
 }

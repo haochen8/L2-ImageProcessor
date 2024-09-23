@@ -1,7 +1,7 @@
 /**
  * Utility functions
  *
- * @module utilities.js
+ * @file utilities.js
  * @author Hao Chen
  * @version 1.0.0
  */
@@ -28,13 +28,6 @@ export function rotateImage(imageData, angle) {
     return imageData;
   }
 
-  // Create temporary canvas and context for the original image
-  const temporaryCanvas = document.createElement("canvas");
-  temporaryCanvas.width = imageData.width;
-  temporaryCanvas.height = imageData.height;
-  const temporaryContext = temporaryCanvas.getContext("2d");
-  temporaryContext.putImageData(imageData, 0, 0);
-
   // Set new dimensions for the rotated image
   let newWidth, newHeight;
   if (angle === 90 || angle === 270) {
@@ -53,6 +46,7 @@ export function rotateImage(imageData, angle) {
   const context = canvas.getContext("2d");
 
   // Apply transformation based on angle
+  context.save();
   if (angle === 90) {
     context.translate(newWidth, 0);
     context.rotate(Math.PI / 2);
@@ -64,8 +58,16 @@ export function rotateImage(imageData, angle) {
     context.rotate((3 * Math.PI) / 2);
   }
 
+  // Create temporary canvas and context for the original image
+  const temporaryCanvas = document.createElement("canvas");
+  temporaryCanvas.width = imageData.width;
+  temporaryCanvas.height = imageData.height;
+  const temporaryContext = temporaryCanvas.getContext("2d");
+  temporaryContext.putImageData(imageData, 0, 0);
+
   // Draw original image on the transformed context
   context.drawImage(temporaryCanvas, 0, 0);
+  context.restore();
 
   // Get the rotated image data and return it
   const rotatedImageData = context.getImageData(0, 0, newWidth, newHeight);
