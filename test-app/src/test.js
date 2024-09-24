@@ -13,6 +13,8 @@ const fileInput = document.getElementById('fileInput')
 const rotateButton = document.getElementById('rotateButton')
 const resetButton = document.getElementById('resetButton')
 const grayScaleButton = document.getElementById('grayScaleButton')
+const brightnessInput = document.getElementById('brightnessInput')
+// Get the canvas and context
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d', { willREADFrequently: true })
 
@@ -62,6 +64,17 @@ resetButton.addEventListener('click', () => {
     displayImage(processor.getImageData())
   } else {
     alert('There is none image to reset')
+  }
+})
+
+// Event listener for the brightness input
+brightnessInput.addEventListener('input', (event) => {
+  if (processor) {
+    const value = parseInt(event.target.value, 10)
+    processor.brightness(value)
+    displayImage(processor.getImageData())
+  } else {
+    alert('There is none image to adjust brightness')
   }
 })
 

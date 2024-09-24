@@ -9,16 +9,10 @@
 /**
  * Apply a gray scale filter to the image.
  *
+ * @param {ImageData} imageData - The image data to apply the gray scale filter
  * @returns {ImageData} - The image data of the canvas
  */
-export function grayScale () {
-  // Get the canvas and context with willREADFrequently set to true
-  const canvas = document.getElementById('canvas')
-  const context = canvas.getContext('2d', { willREADFrequently: true })
-
-  // Get the image data
-  const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-
+export function grayScale (imageData) {
   /**
    * Calculate the gray value of a pixel using the NFSC formula.
    *
@@ -42,8 +36,6 @@ export function grayScale () {
     imageData.data[i + 1] = gray
     imageData.data[i + 2] = gray
   }
-  // Put the image data back on the canvas
-  context.putImageData(imageData, 0, 0)
 
   return imageData
 }
@@ -51,23 +43,35 @@ export function grayScale () {
 /**
  * Adjust the brightness of the image.
  *
+ * @param {ImageData} imageData - The image data to adjust the brightness
  * @param {number} value - The value to adjust the brightness by
  * @returns {ImageData} - The image data of the canvas
  */
-export function adjustBrightness (value) {
+export function adjustBrightness (imageData, value) {
   // Get the canvas and context with willREADFrequently set to true
   const canvas = document.getElementById('canvas')
   const context = canvas.getContext('2d', { willREADFrequently: true })
 
   // Get the image data
-  const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+  imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+
+  const brightness = (value / 100) * 255
+
+  /**
+   * Clamp a value to be between 0 and 255.
+   *
+   * @param {number} value - The value to clamp
+   * @returns {number} - The clamped value
+   */
+  const clamp = (value) => Math.min(255, Math.max(0, value))
 
   // Apply the brightness adjustment to each pixel
   for (let i = 0; i < imageData.data.length; i += 4) {
-    imageData.data[i] += value
-    imageData.data[i + 1] += value
-    imageData.data[i + 2] += value
+    imageData.data[i] = clamp(imageData.data[i] + brightness)
+    imageData.data[i + 1] = clamp(imageData.data[i + 1] + brightness)
+    imageData.data[i + 2] = clamp(imageData.data[i + 2] + brightness)
   }
+  console.log('Brightness:' + imageData.data)
   // Put the image data back on the canvas
   context.putImageData(imageData, 0, 0)
 

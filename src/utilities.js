@@ -143,6 +143,16 @@ export function loadImage (file) {
 }
 
 /**
+ * Create a copy of an image data object.
+ *
+ * @param {ImageData} imageData - The image data to copy.
+ * @returns {ImageData} - The copied image data.
+ */
+export function imageDataCopy (imageData) {
+  return new ImageData(new Uint8ClampedArray(imageData.data), imageData.width, imageData.height)
+}
+
+/**
  * Reset an image to its original state.
  *
  * @param {ImageData} originalImageData - The original image data.
