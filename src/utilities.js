@@ -149,7 +149,10 @@ export function loadImage (file) {
  * @returns {ImageData} - The copied image data.
  */
 export function imageDataCopy (imageData) {
-  return new ImageData(new Uint8ClampedArray(imageData.data), imageData.width, imageData.height)
+  return new ImageData(
+    new Uint8ClampedArray(imageData.data),
+    imageData.width,
+    imageData.height)
 }
 
 /**

@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-import { ImageProcessor, loadImage } from '../../src/index.js'
+import { ImageProcessor, loadImage, imageDataCopy } from '../../src/index.js'
 
 // Get elements from the DOM
 const fileInput = document.getElementById('fileInput')
@@ -29,7 +29,7 @@ fileInput.addEventListener('change', async (event) => {
     const imageData = await loadImage(file)
 
     // Save the original image data
-    originalImageData = imageData
+    originalImageData = imageDataCopy(imageData)
     processor = new ImageProcessor(imageData)
     displayImage(processor.getImageData())
   } catch (error) {

@@ -6,6 +6,8 @@
  * @version 1.0.0
  */
 
+import { imageDataCopy } from './utilities.js'
+
 /**
  * Apply a gray scale filter to the image.
  *
@@ -13,6 +15,9 @@
  * @returns {ImageData} - The image data of the canvas
  */
 export function grayScale (imageData) {
+  const newImageData = imageDataCopy(imageData)
+  const data = newImageData.data
+
   /**
    * Calculate the gray value of a pixel using the NFSC formula.
    *
@@ -25,19 +30,19 @@ export function grayScale (imageData) {
     0.299 * red + 0.587 * green + 0.114 * blue
 
   // Apply the formula to each pixel
-  for (let i = 0; i < imageData.data.length; i += 4) {
-    const red = imageData.data[i]
-    const green = imageData.data[i + 1]
-    const blue = imageData.data[i + 2]
+  for (let i = 0; i < data.length; i += 4) {
+    const red = data[i]
+    const green = data[i + 1]
+    const blue = data[i + 2]
     // Calculate the gray value
     const gray = formula(red, green, blue)
     // Set the red, green, and blue values to the gray value
-    imageData.data[i] = gray
-    imageData.data[i + 1] = gray
-    imageData.data[i + 2] = gray
+    data[i] = gray
+    data[i + 1] = gray
+    data[i + 2] = gray
   }
 
-  return imageData
+  return newImageData
 }
 
 /**
