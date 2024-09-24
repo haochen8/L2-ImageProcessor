@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-import { ImageProcessor } from "./ImageProcessor.js";
-import { loadImage } from "./utilities.js";
+import { ImageProcessor } from './ImageProcessor.js'
+import { loadImage } from './utilities.js'
 
-export { ImageProcessor, loadImage };
+export { ImageProcessor, loadImage }
