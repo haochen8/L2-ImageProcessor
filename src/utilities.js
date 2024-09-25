@@ -154,13 +154,3 @@ export function imageDataCopy (imageData) {
     imageData.width,
     imageData.height)
 }
-
-/**
- * Reset an image to its original state.
- *
- * @param {ImageData} originalImageData - The original image data.
- * @returns {ImageData} - The original image data.
- */
-export function resetImage (originalImageData) {
-  return originalImageData
-}

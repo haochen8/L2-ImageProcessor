@@ -6,20 +6,19 @@
  * @version 1.0.0
  */
 
-import { ImageProcessor, loadImage, imageDataCopy } from '../../src/index.js'
+import { ImageProcessor, loadImage } from '../../src/index.js'
 
 // Get elements from the DOM
 const fileInput = document.getElementById('fileInput')
 const rotateButton = document.getElementById('rotateButton')
 const resetButton = document.getElementById('resetButton')
 const grayScaleButton = document.getElementById('grayScaleButton')
+const contrastInput = document.getElementById('contrastInput')
 const brightnessInput = document.getElementById('brightnessInput')
 // Get the canvas and context
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d', { willREADFrequently: true })
 
-// Variables to store the original image data and the image processor
-let originalImageData
 let processor
 
 // Event listener for the file input
@@ -29,7 +28,6 @@ fileInput.addEventListener('change', async (event) => {
     const imageData = await loadImage(file)
 
     // Save the original image data
-    originalImageData = imageDataCopy(imageData)
     processor = new ImageProcessor(imageData)
     displayImage(processor.getImageData())
   } catch (error) {
@@ -57,16 +55,6 @@ grayScaleButton.addEventListener('click', () => {
   }
 })
 
-// Event listener for the reset button
-resetButton.addEventListener('click', () => {
-  if (originalImageData) {
-    processor = new ImageProcessor(originalImageData)
-    displayImage(processor.getImageData())
-  } else {
-    alert('There is none image to reset')
-  }
-})
-
 // Event listener for the brightness input
 brightnessInput.addEventListener('input', (event) => {
   if (processor) {
@@ -75,6 +63,27 @@ brightnessInput.addEventListener('input', (event) => {
     displayImage(processor.getImageData())
   } else {
     alert('There is none image to adjust brightness')
+  }
+})
+
+// Event listener for the blur button
+contrastInput.addEventListener('input', (event) => {
+  if (processor) {
+    const value = parseFloat(event.target.value)
+    processor.contrast(value)
+    displayImage(processor.getImageData())
+  } else {
+    alert('There is none image to adjust contrast')
+  }
+})
+
+// Event listener for the reset button
+resetButton.addEventListener('click', () => {
+  if (processor) {
+    processor.reset()
+    displayImage(processor.getImageData())
+  } else {
+    alert('There is none image to reset')
   }
 })
 

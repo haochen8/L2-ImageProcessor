@@ -58,6 +58,7 @@ export function adjustBrightness (imageData, value) {
   const newImageData = imageDataCopy(imageData)
   const data = newImageData.data
 
+  // Calculate the brightness value
   const brightness = value / 100 * 255
 
   /**
@@ -75,6 +76,37 @@ export function adjustBrightness (imageData, value) {
     data[i + 1] = clamp(data[i + 1] + brightness) // Green
     data[i + 2] = clamp(data[i + 2] + brightness) // Blue
   }
-  console.log('data', data)
+  return newImageData
+}
+
+/**
+ * Apply a contrast filter to the image.
+ *
+ * @param {ImageData} imageData - The image data to apply the contrast filter
+ * @param {number} value - The value to adjust the contrast by
+ * @returns {ImageData} - The image data of the canvas
+ */
+export function adjustContrast (imageData, value) {
+  // Create a copy of the image data
+  const newImageData = imageDataCopy(imageData)
+  const data = newImageData.data
+
+  // Calculate the contrast factor
+  const contrastFactor = (259 * (value + 255)) / (255 * (259 - value))
+
+  /**
+   * Clamp a value to be between 0 and 255.
+   *
+   * @param {number} val - The value to clamp
+   * @returns {number} - The clamped value
+   */
+  const clamp = (val) => Math.min(255, Math.max(0, val))
+
+  // Apply the contrast adjustment to each pixel
+  for (let i = 0; i < data.length; i += 4) {
+    data[i] = clamp(contrastFactor * (data[i] - 128) + 128) // Red
+    data[i + 1] = clamp(contrastFactor * (data[i + 1] - 128) + 128) // Green
+    data[i + 2] = clamp(contrastFactor * (data[i + 2] - 128) + 128) // Blue
+  }
   return newImageData
 }

@@ -7,7 +7,7 @@
  */
 
 import * as filters from './filters.js'
-import { rotateImage, resetImage, imageDataCopy } from './utilities.js'
+import { rotateImage, imageDataCopy } from './utilities.js'
 
 /**
  * Class for processing images.
@@ -36,7 +36,7 @@ export class ImageProcessor {
    * Reset the image to its original state.
    */
   reset () {
-    this.imageData = resetImage(this.imageData)
+    this.imageData = imageDataCopy(this.originalImageData)
   }
 
   /**
@@ -53,6 +53,15 @@ export class ImageProcessor {
    */
   brightness (value) {
     this.imageData = filters.adjustBrightness(this.originalImageData, value)
+  }
+
+  /**
+   * Adjust the contrast of the image.
+   *
+   * @param {number} value - The value to adjust the contrast by.
+   */
+  contrast (value) {
+    this.imageData = filters.adjustContrast(this.originalImageData, value)
   }
 
   /**
