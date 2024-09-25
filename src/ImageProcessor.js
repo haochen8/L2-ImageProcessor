@@ -7,7 +7,7 @@
  */
 
 import * as filters from './filters.js'
-import { rotateImage, resetImage } from './utilities.js'
+import { rotateImage, resetImage, imageDataCopy } from './utilities.js'
 
 /**
  * Class for processing images.
@@ -20,6 +20,7 @@ export class ImageProcessor {
    */
   constructor (imageData) {
     this.imageData = imageData
+    this.originalImageData = imageDataCopy(imageData)
   }
 
   /**
@@ -51,7 +52,7 @@ export class ImageProcessor {
    * @param {number} value - The value to adjust the brightness by.
    */
   brightness (value) {
-    this.imageData = filters.adjustBrightness(this.imageData, value)
+    this.imageData = filters.adjustBrightness(this.originalImageData, value)
   }
 
   /**

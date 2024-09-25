@@ -143,7 +143,7 @@ export function loadImage (file) {
 }
 
 /**
- * Create a copy of an image data object.
+ * Create a copy of an image data object with 8-bit clamped array data.
  *
  * @param {ImageData} imageData - The image data to copy.
  * @returns {ImageData} - The copied image data.

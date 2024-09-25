@@ -15,6 +15,7 @@ import { imageDataCopy } from './utilities.js'
  * @returns {ImageData} - The image data of the canvas
  */
 export function grayScale (imageData) {
+  // Create a copy of the image data
   const newImageData = imageDataCopy(imageData)
   const data = newImageData.data
 
@@ -53,32 +54,27 @@ export function grayScale (imageData) {
  * @returns {ImageData} - The image data of the canvas
  */
 export function adjustBrightness (imageData, value) {
-  // Get the canvas and context with willREADFrequently set to true
-  const canvas = document.getElementById('canvas')
-  const context = canvas.getContext('2d', { willREADFrequently: true })
+  // Create a copy of the image data
+  const newImageData = imageDataCopy(imageData)
+  const data = newImageData.data
 
-  // Get the image data
-  imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-
-  const brightness = (value / 100) * 255
+  const brightness = value / 100 * 255
 
   /**
    * Clamp a value to be between 0 and 255.
    *
-   * @param {number} value - The value to clamp
+   * @param {number} val - The value to clamp
    * @returns {number} - The clamped value
    */
-  const clamp = (value) => Math.min(255, Math.max(0, value))
+  const clamp = (val) => Math.min(255, Math.max(0, val))
 
   // Apply the brightness adjustment to each pixel
-  for (let i = 0; i < imageData.data.length; i += 4) {
-    imageData.data[i] = clamp(imageData.data[i] + brightness)
-    imageData.data[i + 1] = clamp(imageData.data[i + 1] + brightness)
-    imageData.data[i + 2] = clamp(imageData.data[i + 2] + brightness)
+  for (let i = 0; i < data.length; i += 4) {
+    // Adjust the red, green, and blue values
+    data[i] = clamp(data[i] + brightness) // Red
+    data[i + 1] = clamp(data[i + 1] + brightness) // Green
+    data[i + 2] = clamp(data[i + 2] + brightness) // Blue
   }
-  console.log('Brightness:' + imageData.data)
-  // Put the image data back on the canvas
-  context.putImageData(imageData, 0, 0)
-
-  return imageData
+  console.log('data', data)
+  return newImageData
 }
