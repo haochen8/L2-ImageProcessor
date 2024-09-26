@@ -15,6 +15,8 @@ const resetButton = document.getElementById('resetButton')
 const grayScaleButton = document.getElementById('grayScaleButton')
 const contrastInput = document.getElementById('contrastInput')
 const brightnessInput = document.getElementById('brightnessInput')
+const noiseButton = document.getElementById('noiseButton')
+const invertButton = document.getElementById('invertButton')
 const errorMessage = document.getElementById('errorMessage')
 
 // Get the canvas and context
@@ -54,6 +56,26 @@ grayScaleButton.addEventListener('click', () => {
     displayImage(processor.getImageData())
   } else {
     errorMessage.textContent = 'There is none image to apply grayscale'
+  }
+})
+
+// Event listener for the noise button
+noiseButton.addEventListener('click', () => {
+  if (processor) {
+    processor.noise()
+    displayImage(processor.getImageData())
+  } else {
+    errorMessage.textContent = 'There is none image to apply noise'
+  }
+})
+
+// Event listener for the invert button
+invertButton.addEventListener('click', () => {
+  if (processor) {
+    processor.invert()
+    displayImage(processor.getImageData())
+  } else {
+    errorMessage.textContent = 'There is none image to invert'
   }
 })
 
