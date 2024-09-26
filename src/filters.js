@@ -91,7 +91,7 @@ export function adjustContrast (imageData, value) {
   const newImageData = imageDataCopy(imageData)
   const data = newImageData.data
 
-  // Calculate the contrast factor
+  // Calculate the contrast factor formula
   const contrastFactor = (259 * (value + 255)) / (255 * (259 - value))
 
   /**
@@ -102,7 +102,7 @@ export function adjustContrast (imageData, value) {
    */
   const clamp = (val) => Math.min(255, Math.max(0, val))
 
-  // Apply the contrast adjustment to each pixel
+  // Apply the contrast adjustment to each pixel using the formula
   for (let i = 0; i < data.length; i += 4) {
     data[i] = clamp(contrastFactor * (data[i] - 128) + 128) // Red
     data[i + 1] = clamp(contrastFactor * (data[i + 1] - 128) + 128) // Green

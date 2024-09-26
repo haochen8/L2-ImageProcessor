@@ -15,4 +15,10 @@ body {
   max-height: 600px;
 }
 
+#errorMessage {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 

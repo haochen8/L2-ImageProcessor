@@ -97,7 +97,6 @@ export function loadImage (file) {
     // If the file is not a valid image file
     if (!isValidImageType(file)) {
       reject(new Error('Invalid image file'))
-      return
     }
 
     // Create a new FileReader

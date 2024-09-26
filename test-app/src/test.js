@@ -15,6 +15,8 @@ const resetButton = document.getElementById('resetButton')
 const grayScaleButton = document.getElementById('grayScaleButton')
 const contrastInput = document.getElementById('contrastInput')
 const brightnessInput = document.getElementById('brightnessInput')
+const errorMessage = document.getElementById('errorMessage')
+
 // Get the canvas and context
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d', { willREADFrequently: true })
@@ -26,12 +28,12 @@ fileInput.addEventListener('change', async (event) => {
   const file = event.target.files[0]
   try {
     const imageData = await loadImage(file)
-
     // Save the original image data
     processor = new ImageProcessor(imageData)
     displayImage(processor.getImageData())
   } catch (error) {
     console.error(error)
+    errorMessage.textContent = 'Invalid image file, try png or jpg'
   }
 })
 
@@ -41,7 +43,7 @@ rotateButton.addEventListener('click', () => {
     processor.rotate(90)
     displayImage(processor.getImageData())
   } else {
-    alert('There is none image to rotate')
+    errorMessage.textContent = 'There is none image to rotate'
   }
 })
 
@@ -51,7 +53,7 @@ grayScaleButton.addEventListener('click', () => {
     processor.grayScale()
     displayImage(processor.getImageData())
   } else {
-    alert('There is none image to grayscale')
+    errorMessage.textContent = 'There is none image to apply grayscale'
   }
 })
 
@@ -62,7 +64,7 @@ brightnessInput.addEventListener('input', (event) => {
     processor.brightness(value)
     displayImage(processor.getImageData())
   } else {
-    alert('There is none image to adjust brightness')
+    errorMessage.textContent = 'There is none image to adjust brightness'
   }
 })
 
@@ -73,7 +75,7 @@ contrastInput.addEventListener('input', (event) => {
     processor.contrast(value)
     displayImage(processor.getImageData())
   } else {
-    alert('There is none image to adjust contrast')
+    errorMessage.textContent = 'There is none image to adjust contrast'
   }
 })
 
@@ -83,7 +85,7 @@ resetButton.addEventListener('click', () => {
     processor.reset()
     displayImage(processor.getImageData())
   } else {
-    alert('There is none image to reset')
+    errorMessage.textContent = 'There is none image to reset'
   }
 })
 
