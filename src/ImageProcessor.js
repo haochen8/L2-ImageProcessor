@@ -43,7 +43,7 @@ export class ImageProcessor {
    * Apply a grayscale filter to the image.
    */
   grayScale () {
-    this.imageData = filters.grayScale(this.imageData)
+    this.imageData = filters.applyGrayscale(this.imageData)
   }
 
   /**
@@ -62,6 +62,15 @@ export class ImageProcessor {
    */
   contrast (value) {
     this.imageData = filters.adjustContrast(this.originalImageData, value)
+  }
+
+  /**
+   * Adjust the brightness of the image.
+   *
+   * @param {number} value - The value to adjust the brightness by.
+   */
+  noise (value) {
+    this.imageData = filters.applyNoise(this.imageData, value)
   }
 
   /**
