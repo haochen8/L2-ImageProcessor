@@ -7,6 +7,6 @@
  */
 
 import { ImageProcessor } from './ImageProcessor.js'
-import { loadImage, imageDataCopy } from './utilities.js'
+import { loadImage } from './utilities.js'
 
-export { ImageProcessor, loadImage, imageDataCopy }
+export { ImageProcessor, loadImage }
