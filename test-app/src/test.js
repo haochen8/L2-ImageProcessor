@@ -42,6 +42,7 @@ fileInput.addEventListener('change', async (event) => {
 // Event listener for the rotate button
 rotateButton.addEventListener('click', () => {
   if (processor) {
+    errorMessage.textContent = ''
     processor.rotate(90)
     displayImage(processor.getImageData())
   } else {
@@ -52,6 +53,7 @@ rotateButton.addEventListener('click', () => {
 // Event listener for the grayscale button
 grayScaleButton.addEventListener('click', () => {
   if (processor) {
+    errorMessage.textContent = ''
     processor.grayScale()
     displayImage(processor.getImageData())
   } else {
@@ -62,6 +64,7 @@ grayScaleButton.addEventListener('click', () => {
 // Event listener for the noise button
 noiseButton.addEventListener('click', () => {
   if (processor) {
+    errorMessage.textContent = ''
     processor.noise()
     displayImage(processor.getImageData())
   } else {
@@ -72,6 +75,7 @@ noiseButton.addEventListener('click', () => {
 // Event listener for the invert button
 invertButton.addEventListener('click', () => {
   if (processor) {
+    errorMessage.textContent = ''
     processor.invert()
     displayImage(processor.getImageData())
   } else {
@@ -93,6 +97,7 @@ brightnessInput.addEventListener('input', (event) => {
 // Event listener for the blur button
 contrastInput.addEventListener('input', (event) => {
   if (processor) {
+    errorMessage.textContent = ''
     const value = parseFloat(event.target.value)
     processor.contrast(value)
     displayImage(processor.getImageData())
@@ -104,6 +109,7 @@ contrastInput.addEventListener('input', (event) => {
 // Event listener for the reset button
 resetButton.addEventListener('click', () => {
   if (processor) {
+    errorMessage.textContent = ''
     processor.reset()
     displayImage(processor.getImageData())
   } else {
@@ -120,7 +126,7 @@ function displayImage (imageData) {
   // Set the canvas dimensions to match the image
   canvas.width = imageData.width
   canvas.height = imageData.height
-
+  errorMessage.textContent = ''
   // Draw the image data on the canvas
   context.putImageData(imageData, 0, 0)
 }
