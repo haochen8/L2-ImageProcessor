@@ -132,13 +132,33 @@ export function applyNoise (imageData) {
 
   const amount = 50
 
-  // Apply the noise adjustment to each pixel using the formula
+  // Apply the noise adjustment to each pixel using the noise formula
   for (let i = 0; i < data.length; i += 4) {
     // Calculation of the noise formula
     const noiseFormula = (Math.random() * 2 - 1) * amount
     data[i] = clamp(data[i] + noiseFormula) // Red
     data[i + 1] = clamp(data[i + 1] + noiseFormula) // Green
     data[i + 2] = clamp(data[i + 2] + noiseFormula) // Blue
+  }
+  return newImageData
+}
+
+/**
+ * Apply a invert filter to the image.
+ *
+ * @param {ImageData} imageData - The image data to apply the noise filter
+ * @returns {ImageData} - The image data of the canvas
+ */
+export function applyInvert (imageData) {
+  // Create a copy of the image data
+  const newImageData = imageDataCopy(imageData)
+  const data = newImageData.data
+
+  // Subtracting 255 with image data to create invert filter
+  for (let i = 0; i < data.length; i += 4) {
+    data[i] = 255 - data[i] // Red
+    data[i + 1] = 255 - data[i + 1] // Green
+    data[i + 2] = 255 - data[i + 2] // Blue
   }
   return newImageData
 }

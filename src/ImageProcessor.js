@@ -74,6 +74,13 @@ export class ImageProcessor {
   }
 
   /**
+   * Apply an invert filter to the image.
+   */
+  invert () {
+    this.imageData = filters.applyInvert(this.imageData)
+  }
+
+  /**
    * Return the image data of the canvas.
    *
    * @returns {ImageData} - The image data of the canvas.
