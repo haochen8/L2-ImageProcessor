@@ -2,8 +2,6 @@
 
 This module is responsible for processing images in JavaScript. It can be used to apply filters like grayscale, brightness, contrast, and invert and also rotate images in png, jpg, and gif formats. The module uses the canvas API to draw the image and manipulate the pixel data. The module also supports creating a deep copy of the image data to keep the original image data state. This ESLint Config in the module are based on Linnaéus University's coding standards which can be installed by running `npm i @lnu/eslint-config`.
 
-
-
 ### Operations
 Image-Proccessor Module supports the following operations:
 - `grayScale()`: Converts the image to grayscale.
@@ -14,6 +12,15 @@ Image-Proccessor Module supports the following operations:
 - `noise()`: Adds a noise filter to the image.
 - `reset()`: Resets the image to its original state.
 - `imageDataCopy`: Creates a deep copy of the image data.
+
+### Installation
+Make sure you have a proper project structure, and that the JavaScript files are in the correct directories. Also make sure that Node.js and npm are installed on your machine.
+
+To install the Image-Processor module, you can clone the repository from GitHub and import the necessary files into your project. The module consists of the following files:
+- `index.js`: The main file that exports the ImageProcessor class and loadImage function.
+- `image-processor.js`: The ImageProcessor class that contains the image processing methods.
+- `filters.js`: The filter functions for grayscale, brightness, contrast, invert, and noise.
+- `utilities.js`: Utility functions like creating a deep copy of the image data and rotating the image, and loading the image file.
 
 ### Usage
 To use this Image-Processor module, you need to import the necessary exported class and functions from the main file (index.js) and create an instance of the ImageProcessor class and loadImage() method to load the image. Therefore you can call the methods from the ImageProcessor class to apply the desired manipulations and reset the image to its original state.
