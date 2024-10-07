@@ -54,6 +54,12 @@ Meaningful names not only improve readability but also reduce the need for exten
 
 Additionally, the applyNoise function would benefit from taking the noise amount as a parameter rather than using it as a hardcoded value. This would make the function more flexible and reusable, allowing the noise intensity to be adjusted dynamically. Refactoring functions to accept parameters for customization would enhance both flexibility and readability, as also highlighted in ***Chapter 3***.
 
+### Reflection on My own Code Quality
+Through the process of developing this module and reflecting on its design, I have gained a deeper understanding of the importance of clean, maintainable code. Initially, I focused primarily on getting the functionality to work, but after reading and reviewing Clean Code, I see areas where the code can be refactored for more clarity and simplicity.
+
+For instance, functions like ***rotateImage*** could be split into smaller, more focused tasks, separating the angle calculation from the image manipulation. I also see the need for better variable naming to improve readability and reduce the reliance on comments.
+
+Overall, working on this project has brought up the importance of writing clean, modular code that is easier to maintain and expand. While the module works as intended, these improvements would make the code more readable, reusable, and adaptable to future changes.
 
 ### Conclusion
 
